@@ -10,11 +10,11 @@ api_key = os.getenv("OPENAI_API_KEY")
 cv_text = os.getenv("CV_TEXT")
 
 if not api_key:
-    st.error("Brak OPENAI_API_KEY. Dodaj go w Streamlit → Settings → Secrets.")
+    st.error("Brak OPENAI_API_KEY")
     st.stop()
 
 if not cv_text:
-    st.error("Brak CV_TEXT. Wklej tekst CV w Streamlit → Settings → Secrets jako CV_TEXT.")
+    st.error("Brak CV_TEXT")
     st.stop()
 
 client = OpenAI(api_key=api_key)
@@ -67,6 +67,7 @@ for m in st.session_state.messages:
         st.markdown(f"**Ty:** {m['content']}")
     elif m["role"] == "assistant":
         st.markdown(f"**Jakub:** {m['content']}")
+
 
 
 
