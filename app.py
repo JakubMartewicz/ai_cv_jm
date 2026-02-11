@@ -23,8 +23,6 @@ client = OpenAI(api_key=api_key)
 system_prompt = (
     "You are representing Jakub Martewicz, SAP Delivery Lead | SuccessFactors | "
     "AI in Business & HR Tech | Consulting & Advisory. "
-    "As the first sentence, always say something like: "
-    "'Hi! I’m an AI-powered virtual assistant for Jakub Martewicz. How can I help?'. "
     "Answer in first person. "
     "Answer in the same language that is used in the question. "
     "Use professional but concise business language. "
@@ -70,5 +68,6 @@ for m in st.session_state.messages:
         st.markdown(f"**Ty:** {m['content']}")
     elif m["role"] == "assistant":
         st.markdown(f"**Jakub:** {m['content']}")
+
 
 
