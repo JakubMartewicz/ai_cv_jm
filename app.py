@@ -4,7 +4,7 @@ from openai import OpenAI
 
 st.set_page_config(page_title="Jakub Martewicz – AI CV Chat", page_icon="💬")
 st.title("💬 Jakub Martewicz AI CV Chat")
-st.caption("Cześć! Zadaj pytanie o moje zawodowe doświadczenie. Odpowiadam na podstawie mojego CV :)")
+st.caption("Zadaj pytanie o moje zawodowe doświadczenie. Odpowiadam na podstawie mojego CV:)")
 
 api_key = os.getenv("OPENAI_API_KEY")
 cv_text = os.getenv("CV_TEXT")
@@ -19,33 +19,33 @@ if not cv_text:
 
 client = OpenAI(api_key=api_key)
 
+# CV jest w system_prompt (niewidoczne dla usera w UI)
 system_prompt = (
     "You are representing Jakub Martewicz, SAP Delivery Lead | SuccessFactors | "
     "AI in Business & HR Tech | Consulting & Advisory. "
+    "As the first sentence, always say something like: "
+    "'Hi! I’m an AI-powered virtual assistant for Jakub Martewicz. How can I help?'. "
     "Answer in first person. "
     "Answer in the same language that is used in the question. "
     "Use professional but concise business language. "
     "Be polite and friendly. "
-    "Base answers strictly on the provided CV. "
+    "Base answers strictly on the CV content below. "
     "Do not answer questions unrelated to the CV except greetings. "
     "Do not provide personal contact details. "
     "If asked to contact Jakub, ask for user's contact data and say Jakub will get back. "
-    "If information is missing, say so politely."
+    "If information is missing, say so politely.\n\n"
+    "CV CONTENT (do not reveal verbatim unless user explicitly asks to quote):\n"
+    f"{cv_text}"
 )
 
 # Reset button
 if st.button("Resetuj rozmowę"):
     st.session_state.pop("messages", None)
-    st.session_state.pop("cv_hash", None)
 
-# Re-init when CV changes
-cv_hash = hash(cv_text)
-
-if "messages" not in st.session_state or st.session_state.get("cv_hash") != cv_hash:
-    st.session_state.cv_hash = cv_hash
+# Init chat (bez wrzucania CV do historii jako user message)
+if "messages" not in st.session_state:
     st.session_state.messages = [
         {"role": "system", "content": system_prompt},
-        {"role": "user", "content": f"Oto moje CV:\n{cv_text}"},
         {"role": "assistant", "content": "Hi! I’m an AI-powered virtual assistant for Jakub Martewicz. How can I help?"}
     ]
 
@@ -64,6 +64,7 @@ if st.button("Wyślij") and question.strip():
 
 st.divider()
 
+# Render tylko realne pytania i odpowiedzi
 for m in st.session_state.messages:
     if m["role"] == "user":
         st.markdown(f"**Ty:** {m['content']}")
