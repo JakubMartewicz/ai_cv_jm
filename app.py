@@ -43,8 +43,7 @@ if st.button("Resetuj rozmowę"):
 # Init chat (bez wrzucania CV do historii jako user message)
 if "messages" not in st.session_state:
     st.session_state.messages = [
-        {"role": "system", "content": system_prompt},
-        {"role": "assistant", "content": "Hi! I’m an AI-powered virtual assistant for Jakub Martewicz. How can I help?"}
+        {"role": "system", "content": system_prompt}
     ]
 
 question = st.text_input("Twoje pytanie", placeholder="Np. Jakie mam doświadczenie w SAP SuccessFactors?")
@@ -68,6 +67,7 @@ for m in st.session_state.messages:
         st.markdown(f"**Ty:** {m['content']}")
     elif m["role"] == "assistant":
         st.markdown(f"**Jakub:** {m['content']}")
+
 
 
 
