@@ -46,9 +46,9 @@ if "messages" not in st.session_state:
         {"role": "system", "content": system_prompt}
     ]
 
-question = st.text_input("Twoje pytanie", placeholder="Np. Jakie mam doświadczenie w SAP SuccessFactors?")
+question = st.chat_input("Np. Jakie mam doświadczenie we wdrożeniach SAP SuccessFactors?")
 
-if st.button("Wyślij") and question.strip():
+if question and question.strip():
     st.session_state.messages.append({"role": "user", "content": question.strip()})
 
     response = client.chat.completions.create(
@@ -61,12 +61,13 @@ if st.button("Wyślij") and question.strip():
 
 st.divider()
 
-# Render tylko realne pytania i odpowiedzi
 for m in st.session_state.messages:
-    if m["role"] == "user":
-        st.markdown(f"**Ty:** {m['content']}")
-    elif m["role"] == "assistant":
-        st.markdown(f"**Jakub:** {m['content']}")
+    if m["role"] == "system":
+        continue  # system_prompt ma być niewidoczny w UI
+    with st.chat_message(m["role"]):
+        st.markdown(m["content"])
+
+
 
 
 
