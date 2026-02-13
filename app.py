@@ -58,7 +58,7 @@ if st.button("Resetuj rozmowę"):
 if "messages" not in st.session_state:
     st.session_state.messages = [
         {"role": "system", "content": system_prompt},
-        {"role": "assistant", "content": "Cześć! 👋 Jestem wirtualnym asystentem Jakuba. Co mogę dla Ciebie zrobić?"}
+        {"role": "assistant", "content": "Cześć! 👋 Jestem wirtualnym asystentem Jakuba. O co chcesz zapytać?"}
     ]
 
 question = st.chat_input("Tutaj wpisz Twoje pytanie i naciśnij enter lub kliknij strzałkę")
@@ -86,6 +86,7 @@ for m in st.session_state.messages:
         avatar="👨‍💼" if role == "assistant" else "🙂"
     ):
         st.markdown(m["content"])
+
 
 
 
