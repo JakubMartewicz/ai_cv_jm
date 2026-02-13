@@ -64,15 +64,15 @@ if "messages" not in st.session_state:
 
 question = st.chat_input("Tutaj wpisz Twoje pytanie i naciśnij enter lub kliknij strzałkę")
 
+question = st.chat_input("Tutaj wpisz Twoje pytanie i naciśnij enter lub kliknij strzałkę")
+
 if question and question.strip():
     st.session_state.messages.append({"role": "user", "content": question.strip()})
 
-    # <-- WSTAWIAMY TUTAJ
-    with st.chat_message("assistant", avatar="jakub.png"):
-        typing_placeholder = st.empty()
-        for i in range(3):
-            typing_placeholder.markdown(f"_Jakub pisze{'.' * (i + 1)}_")
-            time.sleep(0.24)
+    typing_container = st.empty()
+    with typing_container.container():
+        with st.chat_message("assistant", avatar="jakub.png"):
+            st.markdown("_Jakub pisze…_")
 
     response = client.chat.completions.create(
         model="gpt-4o-mini",
@@ -80,6 +80,7 @@ if question and question.strip():
     )
 
     answer = response.choices[0].message.content.strip()
+    typing_container.empty()
     st.session_state.messages.append({"role": "assistant", "content": answer})
 
 st.divider()
@@ -94,6 +95,7 @@ for m in st.session_state.messages:
         avatar="jakub.png" if role == "assistant" else "🙂"
     ):
         st.markdown(m["content"])
+
 
 
 
