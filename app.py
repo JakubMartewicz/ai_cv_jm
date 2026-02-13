@@ -63,13 +63,14 @@ if question and question.strip():
 st.divider()
 
 for m in st.session_state.messages:
-    if m["role"] == "system":
-        continue  # system_prompt ma być niewidoczny w UI
-with st.chat_message(
-    m["role"],
-    avatar="👨‍💼" if m["role"] == "assistant" else "🙂"
-):
+    role = m.get("role", "")
+    if role not in ("user", "assistant"):
+        continue  # nie pokazuj system/tool/etc.
 
+    with st.chat_message(
+        role,
+        avatar="👨‍💼" if role == "assistant" else "🙂"
+    ):
         st.markdown(m["content"])
 
 
