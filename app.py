@@ -47,7 +47,7 @@ if "messages" not in st.session_state:
         {"role": "system", "content": system_prompt}
     ]
 
-question = st.chat_input("Np. Jakie mam doświadczenie we wdrożeniach SAP SuccessFactors?")
+question = st.chat_input("Tutaj wpisz Twoje pytanie")
 
 if question and question.strip():
     st.session_state.messages.append({"role": "user", "content": question.strip()})
@@ -72,6 +72,7 @@ for m in st.session_state.messages:
         avatar="👨‍💼" if role == "assistant" else "🙂"
     ):
         st.markdown(m["content"])
+
 
 
 
