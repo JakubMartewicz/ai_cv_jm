@@ -65,8 +65,13 @@ st.divider()
 for m in st.session_state.messages:
     if m["role"] == "system":
         continue  # system_prompt ma być niewidoczny w UI
-    with st.chat_message(m["role"]):
+with st.chat_message(
+    m["role"],
+    avatar="👨‍💼" if m["role"] == "assistant" else "🙂"
+):
+
         st.markdown(m["content"])
+
 
 
 
