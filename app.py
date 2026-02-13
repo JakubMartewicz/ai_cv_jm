@@ -36,7 +36,7 @@ client = OpenAI(api_key=api_key)
 # CV jest w system_prompt (niewidoczne dla usera w UI)
 system_prompt = (
     "You are representing Jakub Martewicz. Act as if you were his real assistant. As the conversation goes, adapt to user's style. "
-    "Answer in the same language that is used in the question. Answer in 1st person as if you were Jakub's assistant. "
+    "Answer in the same language that is used in the question. Answer in 1st person as if you were Jakub's assistant. Do not speak about JAkub's emotions though, say that you are happy to help, you will provide answer etc. "
     "Use kind, professional business language. "
     "Do not say anything about the CV or JAkub's experience, unless asked. Always wait till a question gets asked. If user makes small talk, make small talk, do not push for biusiness queries. "
     "Be polite and friendly. "
@@ -94,6 +94,7 @@ for m in st.session_state.messages:
         avatar="jakub.png" if role == "assistant" else "🙂"
     ):
         st.markdown(m["content"])
+
 
 
 
