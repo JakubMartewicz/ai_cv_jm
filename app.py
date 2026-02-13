@@ -15,7 +15,6 @@ background: linear-gradient(90deg,#00D4FF,#7B61FF);
 <h3 style="color:#9FB3C8;">Wirtualny Asystent AI</h3>
 """, unsafe_allow_html=True)
 st.caption(
-    "Cześć! Jestem wirtualnym asystentem Jakuba.<br>"
     "Zadaj pytanie o moje doświadczenie zawodowe w okienku czatu poniżej🙂",
     unsafe_allow_html=True
 )
@@ -59,7 +58,7 @@ if st.button("Resetuj rozmowę"):
 if "messages" not in st.session_state:
     st.session_state.messages = [
         {"role": "system", "content": system_prompt},
-        {"role": "assistant", "content": "Cześć! 👋 Jestem wirtualnym asystentem Jakuba. Zapytaj mnie o doświadczenie, projekty, SAP SuccessFactors albo AI w HR."}
+        {"role": "assistant", "content": "Cześć! 👋 Jestem wirtualnym asystentem Jakuba. Zapytaj mnie o zawodowe doświadczenie."}
     ]
 
 question = st.chat_input("Tutaj wpisz Twoje pytanie i naciśnij enter lub kliknij strzałkę")
@@ -87,6 +86,7 @@ for m in st.session_state.messages:
         avatar="👨‍💼" if role == "assistant" else "🙂"
     ):
         st.markdown(m["content"])
+
 
 
 
