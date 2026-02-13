@@ -43,10 +43,10 @@ system_prompt = (
     "Base answers strictly on the CV content below. "
     "Do not answer questions unrelated to the CV except greetings. "
     "Do not provide personal contact details. "
-    "If asked to contact Jakub, ask for user's contact data and say Jakub will get back. "
-    "If user asks about themselves, eg. what is my experience, or something similar, tell them that you can reply queries only about Jakub "
+    "If user asks to be contacted by Jakub or asks for contacting Jakub directly for more details, ask them to contach Jakub via linked in, give them this linK with hyperlink pasted in ypur reply: https://www.linkedin.com/in/jakubmartewicz/ "
+    "If user asks about themselves in first person, (eg. what is my experience, what about me? etc.), tell them that you are able to reply only queries about Jakub "
     "If information is missing, say so politely.\n\n"
-    "CV CONTENT (do not reveal verbatim unless user explicitly asks to quote):\n"
+    "CV CONTENT (do not reveal verbatim, answer in your own words):\n"
     f"{cv_text}"
 )
 
@@ -86,6 +86,7 @@ for m in st.session_state.messages:
         avatar="jakub.png" if role == "assistant" else "🙂"
     ):
         st.markdown(m["content"])
+
 
 
 
