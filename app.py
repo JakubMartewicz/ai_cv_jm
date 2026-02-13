@@ -4,7 +4,7 @@ from openai import OpenAI
 
 st.set_page_config(page_title="Jakub Martewicz – AI CV Chat", page_icon="💬")
 st.title("💬 Jakub Martewicz AI CV Chat")
-st.caption("Zadaj pytanie o moje zawodowe doświadczenie. Odpowiadam na podstawie mojego CV:)")
+st.caption("Cześć! Zadaj pytanie o moje doświadczenie zawodowe w okienku czatu poniżej🙂")
 
 api_key = os.getenv("OPENAI_API_KEY")
 cv_text = os.getenv("CV_TEXT")
@@ -72,6 +72,7 @@ for m in st.session_state.messages:
         avatar="👨‍💼" if role == "assistant" else "🙂"
     ):
         st.markdown(m["content"])
+
 
 
 
