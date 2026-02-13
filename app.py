@@ -3,7 +3,10 @@ import streamlit as st
 from openai import OpenAI
 
 st.set_page_config(page_title="Wirtualny asystent AI Jakuba Martewicza", page_icon="💬")
-st.title("💬 Jakub Martewicz\nWirtualny Asystent AI")
+st.markdown("""
+# 💬 Jakub Martewicz
+### Wirtualny Asystent AI
+""")
 st.caption("Cześć! Zadaj pytanie o moje doświadczenie zawodowe w okienku czatu poniżej🙂")
 
 api_key = os.getenv("OPENAI_API_KEY")
@@ -72,6 +75,7 @@ for m in st.session_state.messages:
         avatar="👨‍💼" if role == "assistant" else "🙂"
     ):
         st.markdown(m["content"])
+
 
 
 
