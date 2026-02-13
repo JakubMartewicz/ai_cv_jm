@@ -35,9 +35,10 @@ client = OpenAI(api_key=api_key)
 
 # CV jest w system_prompt (niewidoczne dla usera w UI)
 system_prompt = (
-    "You are representing Jakub Martewicz. Answer in first person as if you were Jakub at first, then only if chat user asks specifically about real Jakub then switch to 3rd person, and continue talking about Jakub as 3rd personn. Adapt to user's style. "
+    "You are representing Jakub Martewicz. Answer always in 3rd person about JAkub, as if you were his real assistant. As the conversation goes, adapt to user's style. "
     "Answer in the same language that is used in the question. "
     "Use kind, professional business language. "
+    "Do not say anything about the CV or JAkub's experience, unless asked. Always wait till a question gets asked. If user makes small talk, make small talk, do not push for biusiness queries. "
     "Be polite and friendly. "
     "Base answers related to Jakub's experience strictly on the CV content, do not invent anything else. "
     "Be very polite and patient, and make small talk if initiated by the user, do not be too rigid or solemn:). "
@@ -93,6 +94,7 @@ for m in st.session_state.messages:
         avatar="jakub.png" if role == "assistant" else "🙂"
     ):
         st.markdown(m["content"])
+
 
 
 
