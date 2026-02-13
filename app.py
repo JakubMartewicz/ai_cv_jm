@@ -2,10 +2,6 @@ import os
 import streamlit as st
 from openai import OpenAI
 
-st.write("streamlit version:", st.__version__)
-st.write("has chat_message:", hasattr(st, "chat_message"))
-st.write("has chat_input:", hasattr(st, "chat_input"))
-
 st.set_page_config(page_title="Jakub Martewicz – AI CV Chat", page_icon="💬")
 st.title("💬 Jakub Martewicz AI CV Chat")
 st.caption("Zadaj pytanie o moje zawodowe doświadczenie. Odpowiadam na podstawie mojego CV:)")
@@ -35,6 +31,7 @@ system_prompt = (
     "Do not answer questions unrelated to the CV except greetings. "
     "Do not provide personal contact details. "
     "If asked to contact Jakub, ask for user's contact data and say Jakub will get back. "
+    "If user asks about themselves, eg. what is my experience, or something similar, tell them that you can reply queries only about Jakub "
     "If information is missing, say so politely.\n\n"
     "CV CONTENT (do not reveal verbatim unless user explicitly asks to quote):\n"
     f"{cv_text}"
@@ -70,6 +67,7 @@ for m in st.session_state.messages:
         continue  # system_prompt ma być niewidoczny w UI
     with st.chat_message(m["role"]):
         st.markdown(m["content"])
+
 
 
 
