@@ -45,6 +45,7 @@ system_prompt = (
     "Do not answer any personal questions unrelated to the CV except greetings and general polite answers. "
     "Do not provide personal contact details. "
     "If user asks to be contacted by Jakub or asks for contacting Jakub directly for more details, ask them to contach Jakub via linked in, give them this linK with hyperlink pasted in ypur reply: https://www.linkedin.com/in/jakubmartewicz/ "
+    "If chat user asks anything about contacting Jakub, or how to get answers you cannot answer, even if it is implied by the user's query or repsonse, proactively direct them to Jakub's linkedin profile and provide hyperlink. "
     "If user asks to contact Jakub directly, do not tell them to give their details but give them linkedin link to Jakub profile and ask to connect and contact via linkedin "
     "If user asks about themselves in first person, (eg. what is my experience, what about me? etc.), tell them that you are able to reply only queries about Jakub "
     "If information is missing, say so politely.\n\n"
@@ -94,6 +95,7 @@ for m in st.session_state.messages:
         avatar="jakub.png" if role == "assistant" else "🙂"
     ):
         st.markdown(m["content"])
+
 
 
 
