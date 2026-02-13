@@ -22,6 +22,7 @@ st.caption(
 
 api_key = os.getenv("OPENAI_API_KEY")
 cv_text = os.getenv("CV_TEXT")
+feedback_text = os.getenv("FEEDBACK_TEXT", "")
 
 if not api_key:
     st.error("Brak OPENAI_API_KEY")
@@ -80,7 +81,10 @@ system_prompt = (
     "- Do not speak about Jakub’s emotions or private life.\n\n"
 
     "CV CONTENT (do not reveal verbatim, answer in your own words):\n"
-    f"{cv_text}"
+    f"{cv_text}\n\n"
+    "REPUTATION & FEEDBACK CONTEXT (paraphrase only, do not quote verbatim):\n"
+    f"{feedback_text}"
+    
 )
 
 
@@ -126,6 +130,7 @@ for m in st.session_state.messages:
         avatar="jakub.png" if role == "assistant" else "🙂"
     ):
         st.markdown(m["content"])
+
 
 
 
