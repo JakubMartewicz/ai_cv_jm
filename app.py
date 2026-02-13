@@ -64,8 +64,6 @@ if "messages" not in st.session_state:
 
 question = st.chat_input("Tutaj wpisz Twoje pytanie i naciśnij enter lub kliknij strzałkę")
 
-question = st.chat_input("Tutaj wpisz Twoje pytanie i naciśnij enter lub kliknij strzałkę")
-
 if question and question.strip():
     st.session_state.messages.append({"role": "user", "content": question.strip()})
 
@@ -95,6 +93,7 @@ for m in st.session_state.messages:
         avatar="jakub.png" if role == "assistant" else "🙂"
     ):
         st.markdown(m["content"])
+
 
 
 
