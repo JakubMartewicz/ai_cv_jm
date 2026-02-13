@@ -58,7 +58,8 @@ if st.button("Resetuj rozmowę"):
 # Init chat (bez wrzucania CV do historii jako user message)
 if "messages" not in st.session_state:
     st.session_state.messages = [
-        {"role": "system", "content": system_prompt}
+        {"role": "system", "content": system_prompt},
+        {"role": "assistant", "content": "Cześć! 👋 Jestem wirtualnym asystentem Jakuba. Zapytaj mnie o doświadczenie, projekty, SAP SuccessFactors albo AI w HR."}
     ]
 
 question = st.chat_input("Tutaj wpisz Twoje pytanie i naciśnij enter lub kliknij strzałkę")
@@ -86,6 +87,7 @@ for m in st.session_state.messages:
         avatar="👨‍💼" if role == "assistant" else "🙂"
     ):
         st.markdown(m["content"])
+
 
 
 
