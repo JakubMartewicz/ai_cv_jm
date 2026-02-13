@@ -4,9 +4,16 @@ from openai import OpenAI
 
 st.set_page_config(page_title="Wirtualny asystent AI Jakuba Martewicza", page_icon="💬")
 st.markdown("""
-# 💬 Jakub Martewicz
-### Wirtualny Asystent AI
-""")
+<h1 style="
+background: linear-gradient(90deg,#00D4FF,#7B61FF);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+">
+💬 Jakub Martewicz CV
+</h1>
+
+<h3 style="color:#9FB3C8;">Wirtualny Asystent AI</h3>
+""", unsafe_allow_html=True)
 st.caption("Cześć! Zadaj pytanie o moje doświadczenie zawodowe w okienku czatu poniżej🙂")
 
 api_key = os.getenv("OPENAI_API_KEY")
@@ -75,6 +82,7 @@ for m in st.session_state.messages:
         avatar="👨‍💼" if role == "assistant" else "🙂"
     ):
         st.markdown(m["content"])
+
 
 
 
