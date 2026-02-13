@@ -1,5 +1,6 @@
 import os
 import streamlit as st
+import time
 from openai import OpenAI
 
 st.set_page_config(page_title="Wirtualny asystent AI Jakuba Martewicza", page_icon="💬")
@@ -65,13 +66,21 @@ question = st.chat_input("Tutaj wpisz Twoje pytanie i naciśnij enter lub klikni
 if question and question.strip():
     st.session_state.messages.append({"role": "user", "content": question.strip()})
 
+    # <-- WSTAWIAMY TUTAJ
+    with st.chat_message("assistant", avatar="jakub.png"):
+        typing_placeholder = st.empty()
+        for i in range(3):
+            typing_placeholder.markdown(f"_Jakub pisze{'.' * (i + 1)}_")
+            time.sleep(0.35)
+
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=st.session_state.messages
     )
 
     answer = response.choices[0].message.content.strip()
-    st.session_state.messages.append({"role": "assistant", "content": answer})
+    typing_placeholder.markdown(answer)
+    st.session_state.messages.append({"role": "assistant", "content": answer})})
 
 st.divider()
 
@@ -85,6 +94,7 @@ for m in st.session_state.messages:
         avatar="jakub.png" if role == "assistant" else "🙂"
     ):
         st.markdown(m["content"])
+
 
 
 
