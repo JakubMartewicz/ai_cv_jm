@@ -72,7 +72,7 @@ if question and question.strip():
         typing_placeholder = st.empty()
         for i in range(3):
             typing_placeholder.markdown(f"_Jakub pisze{'.' * (i + 1)}_")
-            time.sleep(0.12)
+            time.sleep(0.24)
 
     response = client.chat.completions.create(
         model="gpt-4o-mini",
@@ -95,6 +95,7 @@ for m in st.session_state.messages:
         avatar="jakub.png" if role == "assistant" else "🙂"
     ):
         st.markdown(m["content"])
+
 
 
 
