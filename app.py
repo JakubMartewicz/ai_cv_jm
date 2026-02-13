@@ -80,7 +80,6 @@ if question and question.strip():
     )
 
     answer = response.choices[0].message.content.strip()
-    typing_placeholder.markdown(answer)
     st.session_state.messages.append({"role": "assistant", "content": answer})
 
 st.divider()
@@ -95,6 +94,7 @@ for m in st.session_state.messages:
         avatar="jakub.png" if role == "assistant" else "🙂"
     ):
         st.markdown(m["content"])
+
 
 
 
