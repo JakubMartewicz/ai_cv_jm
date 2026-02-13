@@ -83,9 +83,10 @@ for m in st.session_state.messages:
 
     with st.chat_message(
         role,
-        avatar="jakub.jpg" if role == "assistant" else "🙂"
+        avatar="jakub.png" if role == "assistant" else "🙂"
     ):
         st.markdown(m["content"])
+
 
 
 
