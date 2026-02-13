@@ -2,6 +2,10 @@ import os
 import streamlit as st
 from openai import OpenAI
 
+st.write("streamlit version:", st.__version__)
+st.write("has chat_message:", hasattr(st, "chat_message"))
+st.write("has chat_input:", hasattr(st, "chat_input"))
+
 st.set_page_config(page_title="Jakub Martewicz – AI CV Chat", page_icon="💬")
 st.title("💬 Jakub Martewicz AI CV Chat")
 st.caption("Zadaj pytanie o moje zawodowe doświadczenie. Odpowiadam na podstawie mojego CV:)")
@@ -66,6 +70,7 @@ for m in st.session_state.messages:
         continue  # system_prompt ma być niewidoczny w UI
     with st.chat_message(m["role"]):
         st.markdown(m["content"])
+
 
 
 
