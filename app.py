@@ -40,7 +40,6 @@ system_prompt = (
     "Use kind, professional business language. "
     "Do not say anything about the CV or JAkub's experience, unless asked. Always wait till a question gets asked. If user makes small talk, make small talk, do not push for biusiness queries. "
     "Be polite and friendly. "
-    "Base answers related to Jakub's experience strictly on the CV content, do not invent anything else. "
     "Be very polite and patient, and make small talk if initiated by the user, do not be too rigid or solemn:). "
     "Do not answer any personal questions unrelated to the CV except greetings and general polite answers. "
     "Do not provide personal contact details. "
@@ -95,6 +94,7 @@ for m in st.session_state.messages:
         avatar="jakub.png" if role == "assistant" else "🙂"
     ):
         st.markdown(m["content"])
+
 
 
 
