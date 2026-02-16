@@ -20,6 +20,11 @@ st.caption(
     unsafe_allow_html=True
 )
 
+st.markdown(
+    "<span style='color:#6EE7B7;'>● Online</span> • Odpowiada zwykle w kilka sekund",
+    unsafe_allow_html=True
+)
+
 api_key = os.getenv("OPENAI_API_KEY")
 cv_text = os.getenv("CV_TEXT")
 feedback_text = os.getenv("FEEDBACK_TEXT", "")
@@ -150,6 +155,7 @@ for m in st.session_state.messages:
         avatar="jakub.png" if role == "assistant" else "🙂"
     ):
         st.markdown(m["content"])
+
 
 
 
