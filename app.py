@@ -156,6 +156,16 @@ for m in st.session_state.messages:
     ):
         st.markdown(m["content"])
 
+st.markdown(
+    """
+    <script>
+    window.scrollTo(0, document.body.scrollHeight);
+    </script>
+    """,
+    unsafe_allow_html=True
+)
+
+
 
 
 
