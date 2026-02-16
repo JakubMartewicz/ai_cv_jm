@@ -107,16 +107,36 @@ if question and question.strip():
     typing_container = st.empty()
     with typing_container.container():
         with st.chat_message("assistant", avatar="jakub.png"):
-            st.markdown("_Jakub pisze…_")
+            typing_placeholder = st.empty()   # tu będzie animacja "Jakub pisze..."
+            answer_placeholder = st.empty()   # tu będzie narastająca odpowiedź
 
-    response = client.chat.completions.create(
+    dots = ["", ".", "..", "..."]
+    i = 0
+    full_text = ""
+    last_tick = time.time()
+
+    stream = client.chat.completions.create(
         model="gpt-4o-mini",
-        messages=st.session_state.messages
+        messages=st.session_state.messages,
+        stream=True,
     )
 
-    answer = response.choices[0].message.content.strip()
+    for event in stream:
+        # animacja co ~150ms
+        now = time.time()
+        if now - last_tick > 0.15:
+            typing_placeholder.markdown(f"_Jakub pisze{dots[i % len(dots)]}_")
+            i += 1
+            last_tick = now
+
+        # dopisuj tokeny do odpowiedzi
+        delta = event.choices[0].delta
+        if delta and getattr(delta, "content", None):
+            full_text += delta.content
+            answer_placeholder.markdown(full_text)
+
     typing_container.empty()
-    st.session_state.messages.append({"role": "assistant", "content": answer})
+    st.session_state.messages.append({"role": "assistant", "content": full_text.strip()})
 
 st.divider()
 
@@ -130,6 +150,7 @@ for m in st.session_state.messages:
         avatar="jakub.png" if role == "assistant" else "🙂"
     ):
         st.markdown(m["content"])
+
 
 
 
