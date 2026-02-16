@@ -99,7 +99,7 @@ def show_typing():
         """
         <div style="margin-top:-8px;margin-bottom:10px;color:#9FB3C8;font-size:14px;">
             <span class="pulse-dot pulse-typing"></span>
-            <strong>Jakub pisze…</strong>
+            <strong>Asystent jest w akcji!:)</strong>
         </div>
         """,
         unsafe_allow_html=True
@@ -256,6 +256,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 
 
