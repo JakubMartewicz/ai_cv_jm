@@ -43,14 +43,77 @@ st.caption(
     unsafe_allow_html=True
 )
 
-st.markdown(
-    """
-    <div style="margin-top:-8px;margin-bottom:10px;color:#9FB3C8;font-size:14px;">
-        <span class="pulse-dot"></span><strong>Online</strong> • Odpowiada zwykle w kilka sekund
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+# --- STATUS (CSS + dynamiczny placeholder) ---
+st.markdown("""
+<style>
+.pulse-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+  border-radius: 50%;
+  transform: translateY(1px);
+}
+
+/* 🟢 ONLINE */
+.pulse-online {
+  background: #6EE7B7;
+  box-shadow: 0 0 0 0 rgba(110, 231, 183, 0.7);
+  animation: pulse-online 1.4s infinite;
+}
+@keyframes pulse-online {
+  0%   { box-shadow: 0 0 0 0 rgba(110, 231, 183, 0.7); }
+  70%  { box-shadow: 0 0 0 10px rgba(110, 231, 183, 0.0); }
+  100% { box-shadow: 0 0 0 0 rgba(110, 231, 183, 0.0); }
+}
+
+/* 🟣 TYPING */
+.pulse-typing {
+  background: #A78BFA;
+  box-shadow: 0 0 0 0 rgba(167, 139, 250, 0.7);
+  animation: pulse-typing 1.2s infinite;
+}
+@keyframes pulse-typing {
+  0%   { box-shadow: 0 0 0 0 rgba(167, 139, 250, 0.7); }
+  70%  { box-shadow: 0 0 0 10px rgba(167, 139, 250, 0.0); }
+  100% { box-shadow: 0 0 0 0 rgba(167, 139, 250, 0.0); }
+}
+</style>
+""", unsafe_allow_html=True)
+
+status_placeholder = st.empty()
+
+def show_online():
+    status_placeholder.markdown(
+        """
+        <div style="margin-top:-8px;margin-bottom:10px;color:#9FB3C8;font-size:14px;">
+            <span class="pulse-dot pulse-online"></span>
+            <strong>Online</strong> • Odpowiada zwykle w kilka sekund
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+def show_typing():
+    status_placeholder.markdown(
+        """
+        <div style="margin-top:-8px;margin-bottom:10px;color:#9FB3C8;font-size:14px;">
+            <span class="pulse-dot pulse-typing"></span>
+            <strong>Jakub pisze…</strong>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+# Startowo: online
+show_online()
+# --- /STATUS ---
+
+
+
+
+
+
 
 api_key = os.getenv("OPENAI_API_KEY")
 cv_text = os.getenv("CV_TEXT")
@@ -135,6 +198,7 @@ question = st.chat_input("Tutaj wpisz Twoje pytanie i naciśnij enter lub klikni
 
 if question and question.strip():
     st.session_state.messages.append({"role": "user", "content": question.strip()})
+    show_typing()
 
     typing_container = st.empty()
     with typing_container.container():
@@ -169,6 +233,7 @@ if question and question.strip():
 
     typing_container.empty()
     st.session_state.messages.append({"role": "assistant", "content": full_text.strip()})
+    show_online()
 
 st.divider()
 
@@ -191,6 +256,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 
 
