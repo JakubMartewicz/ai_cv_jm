@@ -15,13 +15,40 @@ background: linear-gradient(90deg,#00D4FF,#7B61FF);
 
 <h3 style="color:#9FB3C8;">Wirtualny Asystent AI</h3>
 """, unsafe_allow_html=True)
+
+st.markdown("""
+<style>
+.pulse-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: #6EE7B7;
+  box-shadow: 0 0 0 0 rgba(110, 231, 183, 0.7);
+  animation: pulse 1.4s infinite;
+  transform: translateY(1px);
+}
+
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(110, 231, 183, 0.7); }
+  70%  { box-shadow: 0 0 0 10px rgba(110, 231, 183, 0.0); }
+  100% { box-shadow: 0 0 0 0 rgba(110, 231, 183, 0.0); }
+}
+</style>
+""", unsafe_allow_html=True)
+
 st.caption(
     "Zadaj pytanie o moje doświadczenie zawodowe w okienku czatu poniżej🙂",
     unsafe_allow_html=True
 )
 
 st.markdown(
-    "<span style='color:#6EE7B7;'>● Online</span> • Odpowiada zwykle w kilka sekund",
+    """
+    <div style="margin-top:-8px;margin-bottom:10px;color:#9FB3C8;font-size:14px;">
+        <span class="pulse-dot"></span><strong>Online</strong> • Odpowiada zwykle w kilka sekund
+    </div>
+    """,
     unsafe_allow_html=True
 )
 
@@ -164,6 +191,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 
 
