@@ -129,7 +129,7 @@ if not cv_text:
 
 client = OpenAI(api_key=api_key)
 
-# CV jest w system_prompt (niewidoczne dla usera w UI)
+# CV
 system_prompt = (
     "You are representing Jakub Martewicz. Act as his professional AI assistant. "
     "Your goal is to help the user understand how Jakub can create business value in their context.\n\n"
@@ -203,8 +203,8 @@ if question and question.strip():
     typing_container = st.empty()
     with typing_container.container():
         with st.chat_message("assistant", avatar="jakub.png"):
-            typing_placeholder = st.empty()   # tu będzie animacja "Jakub pisze..."
-            answer_placeholder = st.empty()   # tu będzie narastająca odpowiedź
+            typing_placeholder = st.empty()   # animacja "Jakub pisze..."
+            answer_placeholder = st.empty()   # narastająca odpowiedź
 
     dots = ["", ".", "..", "..."]
     i = 0
@@ -256,6 +256,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 
 
